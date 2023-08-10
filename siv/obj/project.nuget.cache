@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "IvSex4DUZb3FjOVXAC769eYJJKb9mV95rLDLPuMc5XzpHY0/3qO2qbO1cQjcdcUyUdakWxdgbpBVgwsV/7Eq7w==",
+  "success": true,
+  "projectFilePath": "/home/nevixity/Documents/Project/siv/MK1/siv/siv.csproj",
+  "expectedPackageFiles": [
+    "/home/nevixity/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.9/microsoft.aspnetcore.app.ref.7.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}

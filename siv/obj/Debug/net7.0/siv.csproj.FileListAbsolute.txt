@@ -1,0 +1,15 @@
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.csproj.AssemblyReference.cache
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.GeneratedMSBuildEditorConfig.editorconfig
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.AssemblyInfoInputs.cache
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.AssemblyInfo.cs
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.csproj.CoreCompileInputs.cache
+/home/nevixity/Documents/Project/siv/MK1/siv/bin/Debug/net7.0/siv
+/home/nevixity/Documents/Project/siv/MK1/siv/bin/Debug/net7.0/siv.deps.json
+/home/nevixity/Documents/Project/siv/MK1/siv/bin/Debug/net7.0/siv.runtimeconfig.json
+/home/nevixity/Documents/Project/siv/MK1/siv/bin/Debug/net7.0/siv.dll
+/home/nevixity/Documents/Project/siv/MK1/siv/bin/Debug/net7.0/siv.pdb
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.dll
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/refint/siv.dll
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.pdb
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/siv.genruntimeconfig.cache
+/home/nevixity/Documents/Project/siv/MK1/siv/obj/Debug/net7.0/ref/siv.dll
