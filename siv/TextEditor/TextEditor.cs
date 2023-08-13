@@ -1,4 +1,7 @@
-using System;
+using InteractiveReadLine;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace siv.TextEditor
 {
@@ -26,7 +29,7 @@ namespace siv.TextEditor
             if((ck.Modifiers == ConsoleModifiers.Control) && ck.Key == ConsoleKey.F)
             {
                 Console.Clear();
-                Console.WriteLine("Enter file path : ");
+                Console.Write("Enter file path : ");
                 string? path = Console.ReadLine();
                 if(path == null)
                 {
@@ -38,6 +41,7 @@ namespace siv.TextEditor
                     try
                     {
                         textCanvas.textLines = File.ReadAllLines(path);
+                        yTextLines = textCanvas.textLines.Length;
                         ReadWriteMode();
                     }
                     catch
@@ -63,12 +67,147 @@ namespace siv.TextEditor
                 if(textCanvas.currentTextMode == textMode.Write)
                 {
                     textCanvas.Render();
-                    textCanvas.AcceptInput();
+
+                    string bufferText = ConsoleReadLine.ReadLine(textCanvas.inputConfig);
+                    if(bufferText == "command")
+                    {
+                        textCanvas.currentTextMode = textMode.Command;
+                        Console.SetCursorPosition(0, Console.WindowHeight);
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        string cmd = ConsoleReadLine.ReadLine(textCanvas.inputConfig);
+                        if(cmd == "sv")
+                        {
+                            SaveMenu();
+                        }
+                        else if(cmd == "setfn")
+                        {
+                            Console.Clear();
+                            Console.Write("Enter new file name(Including file extension) : ");
+                            fileName = Console.ReadLine();
+                            Console.Clear();
+                        }
+                        else if(cmd == "setfp")
+                        {
+                            Console.Clear();
+                            Console.Write("Enter new file path : ");
+                            fileName = Console.ReadLine();
+                            Console.Clear();
+                        }
+                        else if(cmd == "q")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("File exitted without saving 👍");
+                            Environment.Exit(0);
+                        }
+                        else if(cmd == "rd")
+                        {
+                            textCanvas.currentTextMode = textMode.Read;
+                        }
+                    }
+                    else
+                    {
+                        Array.Resize(ref textCanvas.textLines, textCanvas.textLines.Length + 1);
+                        textCanvas.textLines[yTextLines] = bufferText;
+                        yTextLines++;
+                    }
                 }
                 else if(textCanvas.currentTextMode == textMode.Read)
                 {
                     textCanvas.Render();
-                    Console.ReadKey();
+                    ConsoleKeyInfo ck = Console.ReadKey();
+                    if(ck.Key == ConsoleKey.Escape)
+                    {
+                        textCanvas.currentTextMode = textMode.Write;
+                    }
+                }
+            }
+        }
+
+
+        private static void SaveMenu()
+        {
+            Console.Clear();
+            string[] option = new string[]
+            {
+                "Yes",
+                "Change save location",
+                "Exit"
+            };
+            int pointer = 0;
+
+            while(true)
+            {
+                Console.Clear();
+                Console.SetCursorPosition((Console.WindowWidth - $"Save file in {filePath}?".Length) / 2, 15);
+                Console.WriteLine($"Save file in {filePath}?\n");
+                for(int i = 0; i < option.Length; i++)
+                {
+                    if(i == pointer)
+                    {
+                        Console.WriteLine($"- {option[i]} -");
+                    }
+                    else
+                    {
+                        Console.WriteLine(option[i]);
+                    }
+                }
+                ConsoleKeyInfo ck = Console.ReadKey();
+                if(ck.Key == ConsoleKey.UpArrow)
+                {
+                    if(pointer != 0)
+                    {
+                        pointer--;
+                    }
+                }
+                else if(ck.Key == ConsoleKey.DownArrow)
+                {
+                    if(pointer != option.Length - 1)
+                    {
+                        pointer++;
+                    }
+                }
+                else if(ck.Key == ConsoleKey.Enter)
+                {
+                    if(pointer == 0)
+                    {
+                        try
+                        {
+                            File.WriteAllLines(filePath, textCanvas.textLines);
+                            break;
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine($"{ex}");
+                            Console.ReadKey();
+                        }
+                    }
+                    else if (pointer == 1)
+                    {
+                        repeat:
+                        Console.Write("\nEnter a new file path : ");
+                        filePath = Console.ReadLine();
+                        if(filePath == "" || filePath == null)
+                        {
+                            Console.WriteLine("File path is null!");
+                            goto repeat;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                File.WriteAllLines(filePath, textCanvas.textLines);
+                                break;
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"{ex}");
+                            }
+                        }
+                    }
+                    else if(pointer == 2)
+                    {
+                        break;
+                    }
                 }
             }
         }

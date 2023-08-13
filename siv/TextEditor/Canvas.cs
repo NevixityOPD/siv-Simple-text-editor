@@ -1,4 +1,5 @@
 using System;
+using InteractiveReadLine;
 
 namespace siv.TextEditor
 {
@@ -6,6 +7,8 @@ namespace siv.TextEditor
     {
         public string[] textLines;
         public textMode currentTextMode;
+
+        public ReadLineConfig inputConfig = ReadLineConfig.Basic;
         
         public Canvas()
         {
@@ -17,16 +20,8 @@ namespace siv.TextEditor
         {
             for(int i = 0; i < textLines.Length; i++)
             {
-                Console.Write($"{textLines[i]}\n");
+                Console.WriteLine(textLines[i]);
             }
-        }
-
-        public void AcceptInput()
-        {
-            Array.Resize(ref textLines, textLines.Length + 1);
-            string? buffer = Console.ReadLine();
-            textLines[TextEditor.yTextLines] += buffer;
-            TextEditor.yTextLines += 1;
         }
     }
 }

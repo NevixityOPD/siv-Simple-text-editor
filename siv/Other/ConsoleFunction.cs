@@ -4,13 +4,14 @@ namespace siv.Other
 {
     public static class ConsoleFunction
     {
+        public static int pos = 0;
         public static void PrintTopBar(string Text, ConsoleColor topBarColor)
         {
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = topBarColor;
             Console.Write(Text);
-            for(int i = 0; i < Console.WindowWidth - Text.Length; i++)
+            for(int i = 0; i < Console.BufferWidth - Text.Length; i++)
             {
                 Console.Write(' ');
             }
@@ -23,7 +24,7 @@ namespace siv.Other
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = bottomBarColor;
             Console.Write(Text);
-            for(int i = 0; i < Console.WindowWidth - Text.Length; i++)
+            for(int i = 0; i < Console.BufferWidth - Text.Length; i++)
             {
                 Console.Write(' ');
             }
